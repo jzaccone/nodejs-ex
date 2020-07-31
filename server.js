@@ -10,7 +10,6 @@ const requestHistogram = new Prometheus.Histogram({
     labelNames: ['code', 'handler', 'method'],
     buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5]
 })
-
 const requestTimer = (req, res, next) => {
   const path = new URL(req.url, `http://${req.hostname}`).pathname
   const stop = requestHistogram.startTimer({
@@ -52,7 +51,7 @@ app.use(require('pino-http')({logger: pino}));
 app.get('/', (req, res) => {	
   // Use req.log (a `pino` instance) to log JSON:	
   req.log.info({message: 'Hello from Node.js Starter Application!'});		
-  res.send('Hello from Node.js Starter Application with odo!');	
+  res.send('Hello! from Node.js Starter Application with odo!');	
 });	
 
 app.get('*', (req, res) => {
